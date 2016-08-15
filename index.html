@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by pstephenwille (http://jsbin.com/xakeve/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.8/rx.all.js"></script>
+  <meta charset="utf-8">
+  <title>RxJs: Throttling</title>
+</head>
+<body>
+  <button id="clickMe">Click Me</button>
+
+  <h4>values sent</h4>
+  <div id="results"></div>
+<script id="jsbin-javascript" type="text/ecmascript-6">
+var btn = document.querySelector('#clickMe');
+var clicks = Rx.Observable.fromEvent(btn, 'click');
+
+clicks.scan((s) => s + 1, 0)
+  .buffer(clicks.throttle(1000))
+  .forEach(x => sendValues(x));
+
+function sendValues(arr) {
+  var pre = document.createElement('pre');
+  pre.innerHTML = JSON.stringify(arr);
+  document.querySelector('#results')
+    .appendChild(pre);
+}
+</script>
+</body>
+</html>
