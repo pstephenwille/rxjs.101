@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.8/rx.all.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body>
+
+<script id="jsbin-javascript">
+//see output in the console!
+console.clear();
+
+var source = Rx.Observable.create(function(observer) {
+  var id = setTimeout(function() {
+    try {
+      // throw 'my bad error';
+      observer.onNext(42);
+      observer.onCompleted();
+    } catch (error) {
+      observer.onError(error);
+    }
+  }, 1000);
+
+  console.log('started');
+
+  return function() {
+    console.log('disposal called');
+    clearTimeout(id);
+  };
+});
+
+var sub = source.subscribe(function(x) {
+  console.log('next ' + x);
+}, function(err) {
+  console.error(err);
+}, function() {
+  console.info('done');
+});
+</script>
+
+
+
+<script id="jsbin-source-javascript" type="text/javascript">//see output in the console!
+
+console.clear();
+
+var source = Rx.Observable.create(function(observer) {
+  var id = setTimeout(function() {
+    try {
+      // throw 'my bad error';
+      observer.onNext(42);
+      observer.onCompleted();
+    } catch (error) {
+      observer.onError(error);
+    }
+  }, 1000);
+
+  console.log('started');
+
+  return function() {
+    console.log('disposal called');
+    clearTimeout(id);
+  };
+});
+
+var sub = source.subscribe(function(x) {
+  console.log('next ' + x);
+}, function(err) {
+  console.error(err);
+}, function() {
+  console.info('done');
+});</script></body>
+</html>
