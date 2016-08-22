@@ -1,14 +1,22 @@
 {
-  "name": "rxjs",
+  "name": "rxjs101",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc && http-server -c-1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "rx": "^4.1.0"
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.13.2",
+    "requirejs": "^2.2.0",
+    "rx": "^4.1.0",
+    "systemjs": "^0.19.36"
+  },
+  "dependencies": {
+    "rxjs": "^5.0.0-beta.11"
   }
 }
